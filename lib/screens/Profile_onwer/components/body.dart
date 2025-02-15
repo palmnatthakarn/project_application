@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_application/screens/add_dorm/adddorm_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -26,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: AppBar(
         title: Text(
           "Profile",
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -95,30 +96,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(height: 10),
 
               // Edit Profile Button
-              SizedBox(height: 60),
+
               // Dorm Name Input
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
-                  child: Container(
-                    height: 50,
-                    width: 300,
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      "chat",
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.center,
-                    ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(10),
                   ),
-                ), 
+                  child: Text(
+                    "หอพักที่1",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
               ),
               SizedBox(height: 40),
 
               // Add Dorm Button
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddDormOnwerScreen()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    backgroundColor: Colors.purple,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 6,
+                  ),
+                  child: Text(
+                    "เพิ่มหอพักของฉัน",
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -157,11 +176,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     labelText: "Name", hintText: "Charlotte King")),
             TextField(
                 decoration: InputDecoration(
+                    labelText: "Email Address",
+                    hintText: "johnkinggraphics@gmail.com")),
+            TextField(
+                decoration: InputDecoration(
                     labelText: "Username", hintText: "@johnkinggraphics")),
             TextField(
                 obscureText: true,
                 decoration: InputDecoration(
                     labelText: "Password", hintText: "**********")),
+            TextField(
+                decoration: InputDecoration(
+                    labelText: "Phone Number", hintText: "+91 6895312")),
           ],
         ),
       ),

@@ -37,13 +37,13 @@ class Background extends StatelessWidget {
                 "assets/images/4.png",
                 height: size.height * 0.2,
               )),
-          Positioned(
-              left: 0,
-              right: -290,
-              child: Image.asset(
-                "assets/images/10.png",
-                height: size.height * 0.2,
-              )),
+          Align(
+            alignment: Alignment.centerRight, // ชิดขวาสุด
+            child: Image.asset(
+              "assets/images/10.png",
+              height: size.height * 0.2,
+            ),
+          ),
           Positioned(
               top: 80,
               right: 0,

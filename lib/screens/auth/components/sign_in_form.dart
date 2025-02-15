@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:project_application/components/already_have_account_check.dart';
 import 'package:project_application/components/rounded_button.dart';
-import 'package:project_application/screens/Start_user/start_screen.dart';
+import 'package:project_application/screens/Profile_user/profileuser_screen.dart';
+//import 'package:project_application/screens/Start_user/start_screen.dart';
 import 'package:project_application/screens/Type/type_screen.dart';
 import 'package:project_application/screens/Welcome/welcome_screen.dart';
 //import 'package:project_application/screens/auth/sign_up_screen.dart';
@@ -129,7 +130,7 @@ class _SignInFormState extends State<SignInForm> {
                     context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return StartScreen();
+                        return ProfileUserScreen();
                       },
                     ),
                   );

@@ -23,6 +23,7 @@ class Body extends StatelessWidget {
             child: Image.asset(
               "assets/images/logo.png",
               height: size.height * 0.5,
+              width: size.width * 1,
             ).animate()..fadeIn(delay: 500.ms, duration: 800.ms),// แอนิเมชันให้โลโก้เด้ง
           ),
           Center(
@@ -30,7 +31,7 @@ class Body extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: size.height * 0.2),
+                  SizedBox(height: size.height * 0.3),
                   Text(
                     "Welcome !",
                     style: const TextStyle( 
