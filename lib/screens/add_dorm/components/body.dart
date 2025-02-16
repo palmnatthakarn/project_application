@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_application/components/drop_down_field.dart';
 import 'package:project_application/components/input_field.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 void main() {
   runApp(MyApp());
@@ -22,6 +24,7 @@ class AddDormScreen extends StatefulWidget {
 }
 
 class _AddDormScreenState extends State<AddDormScreen> {
+  File? _image;
   String? selectedProvince;
   String? selectedDistrict;
   String? selectedSubDistrict;
@@ -67,11 +70,15 @@ class _AddDormScreenState extends State<AddDormScreen> {
   final TextEditingController paymentDueController = TextEditingController();
   final TextEditingController floorCountController = TextEditingController();
   final TextEditingController room1CountController = TextEditingController();
+  final TextEditingController subdistrictController = TextEditingController();
+  final TextEditingController districtController = TextEditingController();
+  final TextEditingController provinceController = TextEditingController();
 
   final TextEditingController room2CountController = TextEditingController();
   final TextEditingController priceRoomController = TextEditingController();
   final TextEditingController recognizanceController = TextEditingController();
-  final TextEditingController advancepaymentController = TextEditingController();
+  final TextEditingController advancepaymentController =
+      TextEditingController();
   final TextEditingController electricityController = TextEditingController();
   final TextEditingController waterController = TextEditingController();
   final TextEditingController lineController = TextEditingController();
@@ -80,15 +87,25 @@ class _AddDormScreenState extends State<AddDormScreen> {
   final TextEditingController roomPriceFanController = TextEditingController();
   final TextEditingController roomPriceAriController = TextEditingController();
 
+  Future<void> _pickImage() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "ข้อมูลหอพักของฉัน",
-          style: TextStyle(color: Colors.white,
-          fontWeight: FontWeight.bold,
-                    fontFamily: 'poppins',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'poppins',
           ),
         ),
         centerTitle: true,
@@ -112,26 +129,47 @@ class _AddDormScreenState extends State<AddDormScreen> {
               Divider(),
               // หัวข้อ "ที่อยู่"
               sectionTitle("ที่อยู่ *"),
-              inputField( controller: addressController, hint: "เลขที่/ถนน/ซอย/อาคาร"),
-              inputField(controller: addressController, hint: "ตำบล"),
-              inputField(controller: addressController, hint: "อำเภอ"),
-              inputField(controller: addressController, hint: "จังหวัด"),
-              inputField(controller: TextEditingController(), hint: "รหัสไปรษณีย์"),
+              inputField(
+                  controller: addressController, hint: "เลขที่/ถนน/ซอย/อาคาร"),
+              inputField(controller: subdistrictController, hint: "ตำบล"),
+              inputField(controller: districtController, hint: "อำเภอ"),
+              inputField(controller: provinceController, hint: "จังหวัด"),
+              inputField(
+                  controller: TextEditingController(), hint: "รหัสไปรษณีย์"),
               Divider(),
-
+//--------------------------------------------------------------------
               // หัวข้อ "ตำแหน่งหอพัก"
-              sectionTitle("ตำแหน่งหอพัก"),
-              Container(
-                height: 150,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Center(
-                  child: Icon(Icons.location_on, color: Colors.black, size: 40),
+             sectionTitle("อัพโหลดรูปภาพ"),
+              GestureDetector(
+                onTap: _pickImage,
+                child: Container(
+                  height: 150,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(10),
+                    image: _image != null
+                        ? DecorationImage(
+                            image: FileImage(_image!),
+                            fit: BoxFit.cover,
+                          )
+                        : null,
+                  ),
+                  child: _image == null
+                      ? Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.camera_alt, color: Colors.black, size: 40),
+                              SizedBox(height: 5),
+                              Text("เพิ่มรูปภาพ", style: TextStyle(color: Colors.black)),
+                            ],
+                          ),
+                        )
+                      : null,
                 ),
               ),
+ //----------------------------------------------------------
               Divider(),
               // หัวข้อ "จำนวนห้องพัก"
               sectionTitle("จำนวนห้องพัก *"),
@@ -221,15 +259,13 @@ class _AddDormScreenState extends State<AddDormScreen> {
                   hint: "ค่าจ่ายล่วงหน้า"),
               inputField(
                   controller: recognizanceController, hint: "ค่าเงินประกัน"),
-             
+
               Divider(),
               // หัวข้อ "การติดต่อ *"
               sectionTitle("การติดต่อ *"),
               inputField(controller: phoneController, hint: "เบอร์โทรศัพท์"),
               inputField(controller: emailController, hint: "E-mail"),
               inputField(controller: lineController, hint: "Line(ถ้ามี)"),
-
-              
 
               Divider(),
 
@@ -617,24 +653,7 @@ class _AddDormScreenState extends State<AddDormScreen> {
                   // ✅ เพิ่มระยะห่างระหว่างช่อง
                 ],
               ),
-              Row(
-                children: [
-                  Expanded(
-                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
-                      child: Text("โซฟา	")),
-                  Expanded(
-                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
-                    child: dropdownField(
-                        title: "โปรดเลือก",
-                        selectedValue: selected22,
-                        items: ["มี", "ไม่มี"],
-                        onChanged: (value) {
-                          setState(() => selected22 = value);
-                        }),
-                  ),
-                  // ✅ เพิ่มระยะห่างระหว่างช่อง
-                ],
-              ),
+
               Row(
                 children: [
                   Expanded(
@@ -699,12 +718,12 @@ class _AddDormScreenState extends State<AddDormScreen> {
         alignment: Alignment.centerLeft,
         child: Text(
           title,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'poppins'),
+          style: TextStyle(
+              fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'poppins'),
         ),
       ),
     );
   }
-
 
   // Widget สำหรับสร้างปุ่ม
   Widget buildButton(String text, Color color, BuildContext context) {
@@ -712,7 +731,9 @@ class _AddDormScreenState extends State<AddDormScreen> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8),
         child: ElevatedButton(
-          onPressed: () {showConfirmationDialog(context); },
+          onPressed: () {
+            showConfirmationDialog(context);
+          },
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.symmetric(vertical: 14),
             shape: RoundedRectangleBorder(
@@ -769,13 +790,14 @@ void showConfirmationDialog(BuildContext context) {
               saveData(context); // ✅ เรียกฟังก์ชันบันทึกข้อมูล
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-            child: Text("OK",style: TextStyle(color: Colors.white)),
+            child: Text("OK", style: TextStyle(color: Colors.white)),
           ),
         ],
       );
     },
   );
 }
+
 void saveData(BuildContext context) {
   print("📌 บันทึกข้อมูลสำเร็จ!");
   ScaffoldMessenger.of(context).showSnackBar(
@@ -785,3 +807,5 @@ void saveData(BuildContext context) {
     ),
   );
 }
+//-----------------------------------------------
+//อัพรูป

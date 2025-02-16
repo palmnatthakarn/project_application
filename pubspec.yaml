@@ -45,7 +45,7 @@ dependencies:
   dialog_flowtter: ^0.3.3
   cached_network_image: ^3.3.1
   app_links: ^6.3.2
-
+  image_picker: ^1.0.4
 
 
 dev_dependencies:
