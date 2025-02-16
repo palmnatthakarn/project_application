@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_application/components/drop_down_field.dart';
+import 'package:project_application/components/input_field.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +31,32 @@ class _AddDormScreenState extends State<AddDormScreen> {
   String? selectedDaysBuilding;
   String? selectedTpye1Room;
   String? selectedTpye2Room;
+  String? selected1,
+      selected2,
+      selected3,
+      selected4,
+      selected5,
+      selected6,
+      selected7,
+      selected8,
+      selected9,
+      selected10,
+      selected11,
+      selected12,
+      selected13,
+      selected14,
+      selected15,
+      selected16,
+      selected17,
+      selected18,
+      selected19,
+      selected20,
+      selected21,
+      selected22,
+      selected23,
+      selected24,
+      selected25;
+
   final TextEditingController dormNameController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
@@ -44,8 +71,7 @@ class _AddDormScreenState extends State<AddDormScreen> {
   final TextEditingController room2CountController = TextEditingController();
   final TextEditingController priceRoomController = TextEditingController();
   final TextEditingController recognizanceController = TextEditingController();
-  final TextEditingController advancepaymentController =
-      TextEditingController();
+  final TextEditingController advancepaymentController = TextEditingController();
   final TextEditingController electricityController = TextEditingController();
   final TextEditingController waterController = TextEditingController();
   final TextEditingController lineController = TextEditingController();
@@ -60,7 +86,10 @@ class _AddDormScreenState extends State<AddDormScreen> {
       appBar: AppBar(
         title: Text(
           "ข้อมูลหอพักของฉัน",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white,
+          fontWeight: FontWeight.bold,
+                    fontFamily: 'poppins',
+          ),
         ),
         centerTitle: true,
         backgroundColor: Colors.purple,
@@ -79,22 +108,15 @@ class _AddDormScreenState extends State<AddDormScreen> {
             children: [
               // หัวข้อ "ชื่อหอพัก"
               sectionTitle("ชื่อหอพัก *"),
-              inputField(dormNameController, "กรอกข้อมูล"),
+              inputField(controller: dormNameController, hint: "กรอกข้อมูล"),
               Divider(),
               // หัวข้อ "ที่อยู่"
               sectionTitle("ที่อยู่ *"),
-              inputField(addressController, "เลขที่/ถนน/ซอย/อาคาร"),
-              SizedBox(height: 5),
-              dropdownField(title: "จังหวัด *", selectedValue: selectedProvince, items: ["กรุงเทพ", "เชียงใหม่", "ภูเก็ต"], onChanged: (value) {
-                setState(() => selectedProvince = value);
-              }),
-              dropdownField(title: "เขต/อำเภอ *", selectedValue: selectedDistrict, items: ["เขต 1", "เขต 2"], onChanged: (value) {
-                setState(() => selectedDistrict = value);
-              }),
-              dropdownField(title: "แขวง/ตำบล", selectedValue: selectedSubDistrict, items: ["ตำบล 1", "ตำบล 2"], onChanged: (value) {
-                setState(() => selectedSubDistrict = value);
-              }),
-              inputField(TextEditingController(), "รหัสไปรษณีย์"),
+              inputField( controller: addressController, hint: "เลขที่/ถนน/ซอย/อาคาร"),
+              inputField(controller: addressController, hint: "ตำบล"),
+              inputField(controller: addressController, hint: "อำเภอ"),
+              inputField(controller: addressController, hint: "จังหวัด"),
+              inputField(controller: TextEditingController(), hint: "รหัสไปรษณีย์"),
               Divider(),
 
               // หัวข้อ "ตำแหน่งหอพัก"
@@ -114,8 +136,9 @@ class _AddDormScreenState extends State<AddDormScreen> {
               // หัวข้อ "จำนวนห้องพัก"
               sectionTitle("จำนวนห้องพัก *"),
               SizedBox(height: 5),
-              inputField(room1CountController, "จำนวนห้องพัก"),
-              inputField(room2CountController, "จำนวนชั้น "),
+              inputField(
+                  controller: room1CountController, hint: "จำนวนห้องพัก"),
+              inputField(controller: room2CountController, hint: "จำนวนชั้น "),
               sectionTitle("ประเภทห้องพัก *"),
 
               Column(
@@ -123,7 +146,8 @@ class _AddDormScreenState extends State<AddDormScreen> {
                     CrossAxisAlignment.start, // ✅ จัดให้ข้อความชิดซ้าย
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 2), // ✅ เพิ่มระยะห่างเล็กน้อย
+                    padding: EdgeInsets.symmetric(
+                        vertical: 2), // ✅ เพิ่มระยะห่างเล็กน้อย
                     child: Text(
                       "ห้องพัดลม",
                     ),
@@ -132,14 +156,20 @@ class _AddDormScreenState extends State<AddDormScreen> {
                     children: [
                       Expanded(
                         flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
-                        child: dropdownField(title: "โปรดเลือก", selectedValue: selectedTpye1Room, items: ["มี", "ไม่มี"], onChanged: (value) {
-                            setState(() => selectedTpye1Room = value);
-                          }),
+                        child: dropdownField(
+                            title: "โปรดเลือก",
+                            selectedValue: selectedTpye1Room,
+                            items: ["มี", "ไม่มี"],
+                            onChanged: (value) {
+                              setState(() => selectedTpye1Room = value);
+                            }),
                       ),
                       SizedBox(width: 10), // ✅ เพิ่มระยะห่างระหว่างช่อง
                       Expanded(
                         flex: 2, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
-                        child: inputField(roomPriceFanController, "ราคา/เดือน"),
+                        child: inputField(
+                            controller: roomPriceFanController,
+                            hint: "ราคา/เดือน"),
                       ),
                     ],
                   ),
@@ -150,21 +180,27 @@ class _AddDormScreenState extends State<AddDormScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 2), 
+                    padding: EdgeInsets.symmetric(vertical: 2),
                     child: Text("ห้องแอร์"),
                   ),
                   Row(
                     children: [
                       Expanded(
                         flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
-                        child: dropdownField(title: "โปรดเลือก", selectedValue: selectedTpye2Room, items: ["มี", "ไม่มี"], onChanged: (value) {
-                            setState(() => selectedTpye2Room = value);
-                          }),
+                        child: dropdownField(
+                            title: "โปรดเลือก",
+                            selectedValue: selectedTpye2Room,
+                            items: ["มี", "ไม่มี"],
+                            onChanged: (value) {
+                              setState(() => selectedTpye2Room = value);
+                            }),
                       ),
                       SizedBox(width: 10), // ✅ เพิ่มระยะห่างระหว่างช่อง
                       Expanded(
                         flex: 2, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
-                        child: inputField(roomPriceAriController, "ราคา/เดือน"),
+                        child: inputField(
+                            controller: roomPriceAriController,
+                            hint: "ราคา/เดือน"),
                       ),
                     ],
                   ),
@@ -172,101 +208,469 @@ class _AddDormScreenState extends State<AddDormScreen> {
               ),
               Divider(),
               sectionTitle("ค่าสาธารณูปโภค *"),
-              inputField(electricityController, "ค่าไฟ/ยูนิต"),
-              inputField(waterController, "ค่าน้ํา/หน่วย"),
-              inputField(internetController, "ค่าอินเตอร์เน็ต"),
-              inputField(otherController, "ค่าอื่นๆ"),
+              inputField(
+                  controller: electricityController, hint: "ค่าไฟ/ยูนิต"),
+              inputField(controller: waterController, hint: "ค่าน้ํา/หน่วย"),
+              inputField(
+                  controller: internetController, hint: "ค่าอินเตอร์เน็ต"),
+              inputField(controller: otherController, hint: "ค่าอื่นๆ"),
 
               sectionTitle("ค่าใช้จ่าย *"),
-              inputField(advancepaymentController, "ค่าจ่ายล่วงหน้า"),
-              inputField(recognizanceController, "ค่าเงินประกัน"),
-              dropdownField(title: "วันที่ทำบิลค่าเช่า", selectedValue: selectedDaysStart, items: [
-                "วันที่ 1 ของทุกเดือน",
-                "วันที่ 2 ของทุกเดือน",
-                "วันที่ 3 ของทุกเดือน",
-                "วันที่ 4 ของทุกเดือน",
-                "วันที่ 5 ของทุกเดือน",
-                "วันที่ 6 ของทุกเดือน",
-                "วันที่ 7 ของทุกเดือน",
-                "วันที่ 8 ของทุกเดือน",
-                "วันที่ 9 ของทุกเดือน",
-                "วันที่ 10 ของทุกเดือน",
-                "วันที่ 11 ของทุกเดือน",
-                "วันที่ 12 ของทุกเดือน",
-                "วันที่ 13 ของทุกเดือน",
-                "วันที่ 14 ของทุกเดือน",
-                "วันที่ 15 ของทุกเดือน",
-                "วันที่ 16 ของทุกเดือน",
-                "วันที่ 17 ของทุกเดือน",
-                "วันที่ 18 ของทุกเดือน",
-                "วันที่ 19 ของทุกเดือน",
-                "วันที่ 20 ของทุกเดือน",
-                "วันที่ 21 ของทุกเดือน",
-                "วันที่ 22 ของทุกเดือน",
-                "วันที่ 23 ของทุกเดือน",
-                "วันที่ 24 ของทุกเดือน",
-                "วันที่ 25 ของทุกเดือน",
-                "วันที่ 26 ของทุกเดือน",
-                "วันที่ 27 ของทุกเดือน",
-                "วันที่ 28 ของทุกเดือน",
-                "วันที่ 29 ของทุกเดือน",
-                "วันที่ 30 ของทุกเดือน"
-              ], onChanged: (value) {
-                setState(() => selectedDaysStart = value);
-              }),
-              dropdownField(title: "วันที่สิ้นสุดการชำระเงิน", selectedValue: selectedDaysLatest, items: [
-                "วันที่ 1 ของทุกเดือน",
-                "วันที่ 2 ของทุกเดือน",
-                "วันที่ 3 ของทุกเดือน",
-                "วันที่ 4 ของทุกเดือน",
-                "วันที่ 5 ของทุกเดือน",
-                "วันที่ 6 ของทุกเดือน",
-                "วันที่ 7 ของทุกเดือน",
-                "วันที่ 8 ของทุกเดือน",
-                "วันที่ 9 ของทุกเดือน",
-                "วันที่ 10 ของทุกเดือน",
-                "วันที่ 11 ของทุกเดือน",
-                "วันที่ 12 ของทุกเดือน",
-                "วันที่ 13 ของทุกเดือน",
-                "วันที่ 14 ของทุกเดือน",
-                "วันที่ 15 ของทุกเดือน",
-                "วันที่ 16 ของทุกเดือน",
-                "วันที่ 17 ของทุกเดือน",
-                "วันที่ 18 ของทุกเดือน",
-                "วันที่ 19 ของทุกเดือน",
-                "วันที่ 20 ของทุกเดือน",
-                "วันที่ 21 ของทุกเดือน",
-                "วันที่ 22 ของทุกเดือน",
-                "วันที่ 23 ของทุกเดือน",
-                "วันที่ 24 ของทุกเดือน",
-                "วันที่ 25 ของทุกเดือน",
-                "วันที่ 26 ของทุกเดือน",
-                "วันที่ 27 ของทุกเดือน",
-                "วันที่ 28 ของทุกเดือน",
-                "วันที่ 29 ของทุกเดือน",
-                "วันที่ 30 ของทุกเดือน"
-              ], onChanged: (value) {
-                setState(() => selectedDaysLatest = value);
-              }),
-
+              inputField(
+                  controller: advancepaymentController,
+                  hint: "ค่าจ่ายล่วงหน้า"),
+              inputField(
+                  controller: recognizanceController, hint: "ค่าเงินประกัน"),
+             
               Divider(),
               // หัวข้อ "การติดต่อ *"
               sectionTitle("การติดต่อ *"),
-              inputField(phoneController, "เบอร์โทรศัพท์"),
-              inputField(emailController, "E-mail"),
-              inputField(lineController, "Line(ถ้ามี)"),
+              inputField(controller: phoneController, hint: "เบอร์โทรศัพท์"),
+              inputField(controller: emailController, hint: "E-mail"),
+              inputField(controller: lineController, hint: "Line(ถ้ามี)"),
 
-              sectionTitle("ประเภทอาคาร *"),
-              dropdownField(title: "ประเภทอาคาร", selectedValue: selectedDaysBuilding, items: ["หอพัก", "อพาร์ทเมนท์"], onChanged: (value) {
-                setState(() => selectedDaysBuilding = value);
-              }),
-
-              sectionTitle("ประเภทธุรกิจ *"),
-              dropdownField(title: "ประเภทธุรกิจ", selectedValue: selectedDaysBussiness, items: ["บุคคลธรรมดา", "บริษัท/หจก"], onChanged: (value) {
-                setState(() => selectedDaysBussiness = value);
-              }),
+              
 
               Divider(),
+
+              sectionTitle("สิ่งอำนวยความสะดวก "),
+              SizedBox(height: 10),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("อินเตอร์เน็ต")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected1,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected1 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("เครื่องทำน้ำอุ่น	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected2,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected2 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("อนุญาตให้เลี้ยงสัตว์	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected3,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected3 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("บริการเครื่องซักผ้า")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected4,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected4 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              // ------------   ------------
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("ตู้เย็น")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected5,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected5 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("ระเบียง	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected6,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected6 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("เฟอร์นิเจอร์-ตู้,เตียง,โต๊ะ-เกาอี้	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected7,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected7 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("Keycard")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected8,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected8 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              //----------------------------------
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("CCTV")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected9,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected9 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("สแกนลายนิ้วมือ	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected10,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected10 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("ที่จอดรถยนต์		")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected11,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected11 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("ที่จอดรถจักรยาน/จักรยานยนต์")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected12,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected12 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("เคเบิลทีวี/ดาวเทียม")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected13,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected13 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("อนุญาตให้สูบบุหรี่ในห้องพัก	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected14,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected14 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("รปภ.")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected15,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected15 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("สระว่ายน้ำ	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected16,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected16 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              //----------------------------------
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("โรงยิม/ฟิตเนส	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected17,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected17 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("ร้านทำผม-เสริมสวย	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected18,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected18 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("ลิฟต์	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected19,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected19 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("ร้านค้า")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected20,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected20 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("ร้านอาหาร")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected21,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected21 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("โซฟา	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected22,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected22 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("เตาปรุงอาหาร	")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected23,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected23 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      flex: 1, // ✅ กำหนดให้ช่องกรอกราคาแคบลง
+                      child: Text("อนุญาตให้ทำอาหาร")),
+                  Expanded(
+                    flex: 2, // ✅ กำหนดให้ Dropdown กว้างขึ้นเล็กน้อย
+                    child: dropdownField(
+                        title: "โปรดเลือก",
+                        selectedValue: selected24,
+                        items: ["มี", "ไม่มี"],
+                        onChanged: (value) {
+                          setState(() => selected24 = value);
+                        }),
+                  ),
+                  // ✅ เพิ่มระยะห่างระหว่างช่อง
+                ],
+              ),
 
               SizedBox(height: 20),
 
@@ -276,8 +680,8 @@ class _AddDormScreenState extends State<AddDormScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  buildButton("บันทึก", Colors.purple),
-                  buildButton("แก้ไข", Colors.deepPurple),
+                  buildButton("บันทึก", Colors.purple, context),
+                  buildButton("แก้ไข", Colors.deepPurple, context),
                 ],
               ),
             ],
@@ -295,44 +699,20 @@ class _AddDormScreenState extends State<AddDormScreen> {
         alignment: Alignment.centerLeft,
         child: Text(
           title,
-          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, fontFamily: 'poppins'),
         ),
       ),
     );
   }
 
-  // Widget สำหรับช่องกรอกข้อมูล
-  Widget inputField(TextEditingController controller, String hint) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 2),
-      child: SizedBox(
-        height: 36, // ✅ กำหนดความสูงของช่องกรอกข้อมูล
-        child: TextField(
-          controller: controller,
-          style: TextStyle(fontSize: 14), // ✅ ลดขนาดตัวอักษร
-          decoration: InputDecoration(
-            hintText: hint,
-            filled: true,
-            fillColor: Colors.grey[200],
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(6),
-              borderSide: BorderSide.none,
-            ),
-            contentPadding: EdgeInsets.symmetric(
-                vertical: 6, horizontal: 10), // ✅ ลด padding ด้านใน
-          ),
-        ),
-      ),
-    );
-  }
 
   // Widget สำหรับสร้างปุ่ม
-  Widget buildButton(String text, Color color) {
+  Widget buildButton(String text, Color color, BuildContext context) {
     return Expanded(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 8),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: () {showConfirmationDialog(context); },
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.symmetric(vertical: 14),
             shape: RoundedRectangleBorder(
@@ -369,4 +749,39 @@ class _AddDormScreenState extends State<AddDormScreen> {
   }
 }
 
-
+void showConfirmationDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("ยืนยันการบันทึก"),
+        content: Text("คุณแน่ใจหรือไม่ว่าข้อมูลถูกต้อง?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // ปิด Popup
+            },
+            child: Text("Cancel", style: TextStyle(color: Colors.black)),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // ปิด Popup
+              saveData(context); // ✅ เรียกฟังก์ชันบันทึกข้อมูล
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+            child: Text("OK",style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      );
+    },
+  );
+}
+void saveData(BuildContext context) {
+  print("📌 บันทึกข้อมูลสำเร็จ!");
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text("บันทึกข้อมูลสำเร็จ!"),
+      backgroundColor: Colors.green,
+    ),
+  );
+}
