@@ -1,6 +1,8 @@
 import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter/material.dart';
 import 'package:project_application/constants.dart';
+import 'package:project_application/screens/admin/manage_dorms.dart';
+import 'package:project_application/screens/admin/manage_users.dart';
 import 'package:project_application/screens/messages/components/dormdetail.dart';
 //import 'package:project_application/screens/messages/message_screen.dart';
 import 'package:project_application/screens/welcome/welcome_screen.dart';
@@ -26,10 +28,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
       ),
       initialRoute: '/',
-      /*routes: {
-        '/messages': (context) => MessagesScreen(messages: [], onChipSelected: (text) {}),
-        '/dorm-detail': (context) => DormDetail(),
-      },*/
+      routes: {
+         '/manageDorms': (context) => ManageDormsScreen(),
+      '/manageUsers': (context) => ManageUsersScreen(),
+      },
       onGenerateRoute: (settings) {
         if (settings.name?.startsWith('/dorm-detail/') ?? false) {
           return MaterialPageRoute(
@@ -188,3 +190,4 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 }
+

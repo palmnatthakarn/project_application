@@ -24,6 +24,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -61,7 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   CircleAvatar(
                     radius: 60,
                     backgroundColor: Colors.grey[300],
-                    backgroundImage: AssetImage("assets/profile.jpg"),
+                    backgroundImage: AssetImage("assets/images/profile.png"),
                   ),
                   Positioned(
                     bottom: 0,
@@ -129,12 +131,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               SizedBox(height: 40),
-              SizedBox(height: 100),
+
+              SizedBox(
+                height: size.height * 0.14,
+              ),
               // Add Dorm Button
-          RoundedButton(
-                    text: "เพิ่มหอพักของฉัน",
-                    press: () {
-                       Navigator.push(
+              RoundedButton(
+                text: "เพิ่มหอพัก",
+                press: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
@@ -142,8 +147,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       },
                     ),
                   );
-                    },
-                  ),
+                },
+              ),
             ],
           ),
         ),

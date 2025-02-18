@@ -5,7 +5,8 @@ import 'package:project_application/components/already_have_account_check.dart';
 import 'package:project_application/components/rounded_button.dart';
 import 'package:project_application/screens/Type/type_screen.dart';
 import 'package:project_application/screens/Welcome/components/background.dart';
-import 'package:project_application/screens/auth/sign_in_screen.dart';
+import 'package:project_application/screens/admin/admin_dashboard.dart';
+//import 'package:project_application/screens/auth/sign_in_screen.dart';
 
 
 class Body extends StatelessWidget {
@@ -60,7 +61,7 @@ class Body extends StatelessWidget {
                        context,
                         MaterialPageRoute(
                           builder: (context) {
-                           return const SignInScreen();
+                           return AdminDashboard();
                           },
                         ),
                       );
