@@ -69,23 +69,8 @@ class _SignInFormState extends State<SignInForm> {
                   SizedBox(
                     height: size.height * 0.04,
                   ),
-                  Text(
-                    "Welcome Back",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        color: Colors.white),
-                  ),
-                  const Text(
-                    "Log In !",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 60,
-                      color: Colors.white,
-                    ),
-                  ),
                   SizedBox(
-                    height: size.height * 0.16,
+                    height: size.height * 0.3,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(
@@ -126,14 +111,14 @@ class _SignInFormState extends State<SignInForm> {
                   RoundedButton(
                     text: "LOGIN",
                     press: () {
-                       Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) {
-                        return ProfileUserScreen();
-                      },
-                    ),
-                  );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return ProfileUserScreen();
+                          },
+                        ),
+                      );
                     },
                   ),
                   const SizedBox(height: 10),
